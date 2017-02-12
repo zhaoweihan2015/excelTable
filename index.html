@@ -32,7 +32,7 @@
 				<div class="collapse navbar-collapse" id="example-navbar-collapse">
 					<ul class="nav navbar-nav">
 						<li>
-							<a href="#">查询方式</a>
+							<a onclick="showhideDiv('#showBox','show');">查询方式</a>
 						</li>
 						<li>
 							<a href="#">课表修改</a>
@@ -43,27 +43,29 @@
 		</nav>
 
 		<!--ShowTable-->
-		<div class="showBox">
+		<div id="showBox">
 			<!--FormEnter-->
 			<form>
 				<div id="showboxnav1" class="row">
-						<div class="col-xs-4">
-							<a>按教师查询</a>
-						</div>
-						<div class="col-xs-4">
-							<a>按班级查询</a>
-						</div>
-						<div class="col-xs-4">
-							<a>按教室查询</a>
-						</div>
+					<div class="col-xs-4">
+						<a onclick="showLi(0)">按教师查询</a>
+					</div>
+					<div class="col-xs-4">
+						<a onclick="showLi(1)">按班级查询</a>
+					</div>
+					<div class="col-xs-4">
+						<a onclick="showLi(2)">按教室查询</a>
+					</div>
 				</div>
 				<div class="showtableul">
 					<ul>
 						<li>
 							<center>
-								教师：<input type="text" id="TeacherName" value="" />
+								教师：
+								<input type="text" id="TeacherName" value="" />
 								<br />
 								<input type="button" onclick="checkPost('Teacher');" value="click">
+								<input type="button" onclick="showhideDiv('#showBox','hide');" value="cencel">
 							</center>
 						</li>
 						<li>
@@ -72,6 +74,7 @@
 								<input type="text" id="ClassName" value="" />
 								<br />
 								<input type="button" onclick="checkPost('Class');" value="click">
+								<input type="button" onclick="showhideDiv('#showBox','hide');" value="cencel">
 							</center>
 						</li>
 						<li>
@@ -82,6 +85,7 @@
 								<input style="margin-left: 53px;" type="text" id="RoomName2" value="" />
 								<br />
 								<input type="button" onclick="checkPost('Room');" value="click">
+								<input type="button" onclick="showhideDiv('#showBox','hide');" value="cencel">
 							</center>
 						</li>
 					</ul>

@@ -7,6 +7,8 @@ function ceshi(data = "TruE") {
 //根据内容进行AJAX异步请求
 function checkPost(name) {
 	MethodName = name;
+	//消失彈出窗口
+	showhideDiv('#showBox','hide');
 	switch(name) {
 		//Teacher Name Check
 		case "Teacher":
@@ -140,7 +142,7 @@ function PrintTable(data, num) {
 				$oldMid = data[$i]['mid'];
 				//删除操作表格填充
 				if(data[$i]['Delet'] == '1') {
-					$dataChange += '<li>' + data[$i]['ClassName'] + '  第' + num + '周 星期' + data[$i]['ClassDate'] + ' 第' + data[$i]['ClassLine'] + '节课  <a onclick = "DeletClass('+data[$i]['mid']+');">删除</a></li>';
+					$dataChange += '<li>' + data[$i]['ClassName'] + '  第' + num + '周 星期' + data[$i]['ClassDate'] + ' 第' + data[$i]['ClassLine'] + '节课  <a onclick = "DeletClass(' + data[$i]['mid'] + ');">删除</a></li>';
 				}
 			}
 		}
@@ -149,17 +151,18 @@ function PrintTable(data, num) {
 		$i++;
 	};
 }
-function DeletClass(mid){
+
+function DeletClass(mid) {
 	$.ajax({
-		type:"post",
+		type: "post",
 		url: "/libs/Controller/tableControllerl.class.php",
 		dataType: "json",
-		data:{
-			'mid':mid,
-			'mode':'Delet'
+		data: {
+			'mid': mid,
+			'mode': 'Delet'
 		},
-		success:function(data){
-			if(data){
+		success: function(data) {
+			if(data) {
 				alert("删除成功");
 				//刷新表格
 				checkPost(MethodName);
@@ -177,4 +180,18 @@ function show2Box() {
 		$classname = this.innerHTML;
 		$("#changebox").html('<a id="' + $mid + '" >' + $classname + ' 周' + $oldLine + ' 第' + $oldDate + '节课</a>');
 	})
+}
+//查询页动态
+function showhideDiv(obj, e) {
+	if(e == "show") {
+		$(obj).css("display", 'block');
+	} else if(e == "hide") {
+		$(obj).css("display", 'none');
+	}
+}
+$divLi = $(".showtableul").find("li");
+$divLi.eq(0).css("display", 'block');
+function showLi(num) {
+	$divLi.css("display", 'none');
+	$divLi.eq(num).css("display", 'block');
 }
