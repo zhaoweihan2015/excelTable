@@ -41,27 +41,51 @@
 				</div>
 			</div>
 		</nav>
-		
+
 		<!--ShowTable-->
 		<div class="showBox">
 			<!--FormEnter-->
 			<form>
-				<div class="showboxnav1">
+				<div id="showboxnav1" class="row">
+						<div class="col-xs-4">
+							<a>按教师查询</a>
+						</div>
+						<div class="col-xs-4">
+							<a>按班级查询</a>
+						</div>
+						<div class="col-xs-4">
+							<a>按教室查询</a>
+						</div>
+				</div>
+				<div class="showtableul">
 					<ul>
-						<li><a >按教师查询</a></li>
-						<li><a >按班级查询</a></li>
-						<li><a >按教室查询</a></li>
+						<li>
+							<center>
+								教师：<input type="text" id="TeacherName" value="" />
+								<br />
+								<input type="button" onclick="checkPost('Teacher');" value="click">
+							</center>
+						</li>
+						<li>
+							<center>
+								班级：
+								<input type="text" id="ClassName" value="" />
+								<br />
+								<input type="button" onclick="checkPost('Class');" value="click">
+							</center>
+						</li>
+						<li>
+							<center>
+								教室：
+								<input type="text" id="RoomName1" value="" />
+								<br />
+								<input style="margin-left: 53px;" type="text" id="RoomName2" value="" />
+								<br />
+								<input type="button" onclick="checkPost('Room');" value="click">
+							</center>
+						</li>
 					</ul>
 				</div>
-				教师：<input type="text" id="TeacherName" value="" />
-				<input type="button" onclick="checkPost('Teacher');" value="click">
-				<br /> 班级：
-				<input type="text" id="ClassName" value="" />
-				<input type="button" onclick="checkPost('Class');" value="click">
-				<br /> 教室：
-				<input type="text" id="RoomName1" value="" /><input type="text" id="RoomName2" value="" />
-				<input type="button" onclick="checkPost('Room');" value="click">
-				<br />
 			</form>
 		</div>
 
