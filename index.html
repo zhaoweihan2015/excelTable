@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<title></title>
+		<!--	JQuery-->
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	</head>
+
+	<body>
+		<!--FormEnter-->
+		<form>
+			教师：<input type="text" id="TeacherName" value="" />
+			<input type="button" onclick="checkPost('Teacher');" value="click">
+			<br />
+			<hr /> 班级：
+			<input type="text" id="ClassName" value="" />
+			<input type="button" onclick="checkPost('Class');" value="click">
+			<br />
+			<hr /> 教室：
+			<input type="text" id="RoomName1" value="" /><input type="text" id="RoomName2" value="" />
+			<input type="button" onclick="checkPost('Room');" value="click">
+			<br />
+			<hr />
+		</form>
+		<!--week select-->
+		<select id="weekselect">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+			<option value="10">10</option>
+			<option value="11">11</option>
+			<option value="12">12</option>
+			<option value="13">13</option>
+			<option value="14">14</option>
+			<option value="15">15</option>
+			<option value="16">16</option>
+			<option value="17">17</option>
+			<option value="18">18</option>
+			<option value="19">19</option>
+			<option value="20">20</option>
+		</select>
+		<!--Table-->
+		<table id="table" border="1" cellspacing="0" cellpadding="0">
+			<tr>
+				<td>星期</td>
+				<td>周一</td>
+				<td>周二</td>
+				<td>周三</td>
+				<td>周四</td>
+				<td>周五</td>
+				<td>周六</td>
+				<td>周日</td>
+			</tr>
+			<tr>
+				<td>第一节课</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>第二节课</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>第三节课</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>第四节课</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>第五节课</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>第六节课</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+		<!--Change Box-->
+		<div id="changebox">
+		</div>
+		<!--HadChange Box-->
+		<div id="hadchangebox">
+		</div>
+		<!--Change Class Time-->
+		<form>
+			修改为:<br /> 周期：
+			<select id="newWeek">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+				<option value="13">13</option>
+				<option value="14">14</option>
+				<option value="15">15</option>
+				<option value="16">16</option>
+				<option value="17">17</option>
+				<option value="18">18</option>
+				<option value="19">19</option>
+				<option value="20">20</option>
+			</select><br /> 日期：
+			<select id="ClassDate">
+				<option value="1">周一</option>
+				<option value="2">周二</option>
+				<option value="3">周三</option>
+				<option value="4">周四</option>
+				<option value="5">周五</option>
+				<option value="6">周六</option>
+				<option value="7">周日</option>
+			</select><br /> 节数：
+			<select id="ClassLine">
+				<option value="1">第一节</option>
+				<option value="2">第二节</option>
+				<option value="3">第三节</option>
+				<option value="4">第四节</option>
+				<option value="5">第五节</option>
+				<option value="6">第六节</option>
+			</select><br />
+			<input type="button" onclick="ChangeClass();" value="click" />
+		</form>
+		<script src="js/tableAjax.js"type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>
