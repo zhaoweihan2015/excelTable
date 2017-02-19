@@ -12,7 +12,6 @@ class TableModel {
 		$textName1 = $_POST['textName1'];
 		//变量声明并初始化
 		$data = array();
-		$sql = "";
 		//从主表查询课程
 		$sql1 = "SELECT * FROM `schedule` WHERE `" . $checkName1 . "` = '" . $textName1 . "'";
 		//从修改表查询课程
@@ -26,13 +25,17 @@ class TableModel {
 			$sql2 .= " AND `" . $checkName2 . "` = '" . $textName2 . "'";
 		}
 		//进行sql操作
-		$row = $mysql -> query($sql1);
-		while ($res = $row -> fetch_assoc()) {
-			array_push($data, $res);
-		}
-		$row = $mysql -> query($sql2);
-		while ($res = $row -> fetch_assoc()) {
-			array_push($data, $res);
+		$Model = new TableModel();
+		$data = $Model -> PDO_SQL($pdo, $sql1, $data);
+		$data = $Model -> PDO_SQL($pdo, $sql2, $data);
+		return $data;
+	}
+    //sql语句执行和查询结果拼接
+	function PDO_SQL($pdo, $query, $data) {
+		$stms = $pdo -> prepare($query);
+		$res = $stms -> execute();
+		while ($row = $stms -> fetch(PDO::FETCH_ASSOC)) {
+			array_push($data, $row);
 		}
 		return $data;
 	}
@@ -48,13 +51,13 @@ class TableModel {
 		$oldWeek = $_POST['oldWeek'];
 		//sql语句拼接
 		$sql = "UPDATE `schedule` SET `week" . $oldWeek . "`='2' WHERE `mid` = '" . $mid . "';";
-		if ($mysql -> query($sql)) {
+		if ($pdo -> exec($sql)) {
 			$sql = "INSERT INTO `changeform`(`mid`,`cid`, `did`, `head`, `ClassName`, `ClassFloat`, `Classroom`, `ClassDate`, `ClassLine`, `TeacherName`, `Class`)
 ( SELECT `mid`, `cid`, `did`, `head`, `ClassName`, `ClassFloat`, `Classroom`, `ClassDate`, `ClassLine`, `TeacherName`, `Class` FROM `schedule` WHERE `mid` ='" . $mid . "');";
-			if ($mysql -> query($sql)) {
-				$sql = "UPDATE `changeform` SET `week" . $newWeek . "`='1',`ClassDate` = '" . $newDate . "', `ClassLine` = '" . $newLine . "', `oldWeek` = '" . $oldWeek . "'  WHERE `mid` = '" . $mid . "';";
-				if ($mysql -> query($sql)) {
-					return $mid;
+			if ($pdo -> exec($sql)) {
+				$sql = "UPDATE `changeform` SET `week" . $newWeek . "`='1',`ClassDate` = '" . $newDate . "', `ClassLine` = '" . $newLine . "', `oldWeek` = '" . $oldWeek . "'  WHERE `mid` = '" . $mid . "' And `oldWeek` = 0;";
+				if ($pdo -> exec($sql)) {
+					return TRUE;
 				} else {
 					return FALSE;
 					//error返回
@@ -73,28 +76,22 @@ class TableModel {
 		//数据库引入
 		require_once ("../config/connect.php");
 		$mid = $_POST['mid'];
-		//获取oldweek
-		$sql = 'SELECT `oldWeek` FROM `changeform` WHERE `mid` = "' . $mid . '"';
-		if ($row = $mysql -> query($sql)) {
-			$data = $row -> fetch_assoc();
-			$oldWeek = $data['oldWeek'];
+		$oldWeek = $_POST['oldWeek'];
 			//修改主表格week值
 			$sql = "UPDATE `schedule` SET `week" . $oldWeek . "`='1' WHERE `mid` = '" . $mid . "';";
-			if ($mysql -> query($sql)) {
+			if ($pdo -> exec($sql)) {
 				//修改修改表格delet值
-				$sql = "UPDATE `changeform` SET `Delet`='0'WHERE `mid` = '" . $mid . "';";
-				if($mysql -> query($sql)){
-					return TRUE; 
-				}else{
-					return FALSE;//error back
+				$sql = "UPDATE `changeform` SET `Delet`='0'WHERE `mid` = '" . $mid . "' AND `oldWeek` =".$oldWeek.";";
+				if ($pdo -> exec($sql)) {
+					return TRUE;
+				} else {
+					return FALSE;
+					//error back
 				}
-			}else{
-				return FALSE;//error back
+			} else {
+				return $data;
+				//error back
 			}
-		}else{
-			return FALSE;//error back
-		}
-
 	}
 
 }

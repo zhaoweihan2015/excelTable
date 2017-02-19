@@ -1,6 +1,11 @@
 <?php
-require_once("config.php");
- $mysql=mysqli_connect(HOST,ROOT,USERNAME,DATATABLE)
- or exit("CONNECT ERROR");
- //MYSQL CONNECT CONFIG
+require_once ("config.php");
+try {
+	$mysql = 'mysql:host=' . HOST . ';dbname=' . DATATABLE;
+	$pdo = new PDO($mysql, USERNAME, PASSWORD);
+	//POD MYSQL CONNECT CONFIG
+} catch(PDOException $e) {
+	echo $e -> getMessage();
+	//ERROR RETURN
+}
 ?>

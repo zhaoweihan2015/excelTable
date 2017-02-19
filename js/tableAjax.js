@@ -81,7 +81,6 @@ function AjaxSuccess(data, num) {
 	PrintTable(data, num);
 	//box内显示
 	show2Box();
-	//
 }
 //改课事件
 function ChangeClass() {
@@ -94,7 +93,7 @@ function ChangeClass() {
 	//AJAX异步请求
 	$.ajax({
 		type: "post",
-		url: "../libs/Controller/tableControllerl.class.php",
+		url: "./libs/Controller/tableControllerl.class.php",
 		dataType: "json",
 		data: {
 			'newWeek': $newWeek, //新周
@@ -142,7 +141,7 @@ function PrintTable(data, num) {
 				$oldMid = data[$i]['mid'];
 				//删除操作表格填充
 				if(data[$i]['Delet'] == '1') {
-					$dataChange += '<li>' + data[$i]['ClassName'] + '  第' + num + '周 星期' + data[$i]['ClassDate'] + ' 第' + data[$i]['ClassLine'] + '节课  <a onclick = "DeletClass(' + data[$i]['mid'] + ');">删除</a></li>';
+					$dataChange += '<li>' + data[$i]['ClassName'] + '  第' + num + '周 星期' + data[$i]['ClassDate'] + ' 第' + data[$i]['ClassLine'] + '节课  (曾在第'+data[$i]['oldWeek']+'周)<a onclick = "DeletClass(' +data[$i]['mid']+ ','+data[$i]['oldWeek'] +');">删除</a></li>';
 				}
 			}
 		}
@@ -152,13 +151,14 @@ function PrintTable(data, num) {
 	};
 }
 
-function DeletClass(mid) {
+function DeletClass(mid,oldWeek) {
 	$.ajax({
 		type: "post",
-		url: "/libs/Controller/tableControllerl.class.php",
+		url: "./libs/Controller/tableControllerl.class.php",
 		dataType: "json",
 		data: {
 			'mid': mid,
+			'oldWeek':oldWeek,
 			'mode': 'Delet'
 		},
 		success: function(data) {
