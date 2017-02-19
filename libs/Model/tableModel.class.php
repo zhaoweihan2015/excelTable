@@ -52,10 +52,10 @@ class TableModel {
 		//sql语句拼接
 		$sql = "UPDATE `schedule` SET `week" . $oldWeek . "`='2' WHERE `mid` = '" . $mid . "';";
 		if ($pdo -> exec($sql)) {
-			$sql = "INSERT INTO `changeform`(`mid`,`cid`, `did`, `head`, `ClassName`, `ClassFloat`, `Classroom`, `ClassDate`, `ClassLine`, `TeacherName`, `Class`)
-( SELECT `mid`, `cid`, `did`, `head`, `ClassName`, `ClassFloat`, `Classroom`, `ClassDate`, `ClassLine`, `TeacherName`, `Class` FROM `schedule` WHERE `mid` ='" . $mid . "');";
+			$sql = "INSERT INTO `changeform`(`mid`, `ClassName`, `ClassFloat`, `Classroom`, `ClassDate`, `ClassLine`, `TeacherName`, `Class`)
+( SELECT `mid`, `ClassName`, `ClassFloat`, `Classroom`, `ClassDate`, `ClassLine`, `TeacherName`, `Class` FROM `schedule` WHERE `mid` ='" . $mid . "');";
 			if ($pdo -> exec($sql)) {
-				$sql = "UPDATE `changeform` SET `week" . $newWeek . "`='1',`ClassDate` = '" . $newDate . "', `ClassLine` = '" . $newLine . "', `oldWeek` = '" . $oldWeek . "'  WHERE `mid` = '" . $mid . "' And `oldWeek` = 0;";
+				$sql = "UPDATE `changeform` SET `week" . $newWeek . "`='1',`ClassDate` = '" . $newDate . "', `ClassLine` = '" . $newLine . "', `oldWeek` = '" . $oldWeek . "', `newWeek` = '" . $newWeek . "'  WHERE `mid` = '" . $mid . "' And `oldWeek` = 0;";
 				if ($pdo -> exec($sql)) {
 					return TRUE;
 				} else {

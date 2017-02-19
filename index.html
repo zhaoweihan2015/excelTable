@@ -35,13 +35,61 @@
 							<a onclick="showhideDiv('#showBox','show');">查询方式</a>
 						</li>
 						<li>
-							<a href="#">课表修改</a>
+							<a onclick="showhideDiv('#chBox','show');">课表修改</a>
 						</li>
 					</ul>
 				</div>
 			</div>
 		</nav>
-
+		<!--Change Box -->
+		<div id="chBox">
+			<!--Change Class Time-->
+			<form>
+				<div class="changebox">请先查询并点击需要操作的课程</div>
+				修改为:<br /> 周期：
+				<select id="newWeek">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+				</select><br /> 日期：
+				<select id="ClassDate">
+					<option value="1">周一</option>
+					<option value="2">周二</option>
+					<option value="3">周三</option>
+					<option value="4">周四</option>
+					<option value="5">周五</option>
+					<option value="6">周六</option>
+					<option value="7">周日</option>
+				</select><br /> 节数：
+				<select id="ClassLine">
+					<option value="1">第一节</option>
+					<option value="2">第二节</option>
+					<option value="3">第三节</option>
+					<option value="4">第四节</option>
+					<option value="5">第五节</option>
+					<option value="6">第六节</option>
+				</select><br />
+				<input type="button" onclick="ChangeClass();" value="click" />
+				<input type="button" onclick="showhideDiv('#chBox','hide');" value="cencel">
+			</form>
+		</div>
 		<!--ShowTable-->
 		<div id="showBox">
 			<!--FormEnter-->
@@ -192,55 +240,11 @@
 			<option value="20">20</option>
 		</select>
 		<!--Change Box-->
-		<div id="changebox">
+		<div class="changebox">
 		</div>
 		<!--HadChange Box-->
 		<div id="hadchangebox">
 		</div>
-		<!--Change Class Time-->
-		<form>
-			修改为:<br /> 周期：
-			<select id="newWeek">
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
-				<option value="6">6</option>
-				<option value="7">7</option>
-				<option value="8">8</option>
-				<option value="9">9</option>
-				<option value="10">10</option>
-				<option value="11">11</option>
-				<option value="12">12</option>
-				<option value="13">13</option>
-				<option value="14">14</option>
-				<option value="15">15</option>
-				<option value="16">16</option>
-				<option value="17">17</option>
-				<option value="18">18</option>
-				<option value="19">19</option>
-				<option value="20">20</option>
-			</select><br /> 日期：
-			<select id="ClassDate">
-				<option value="1">周一</option>
-				<option value="2">周二</option>
-				<option value="3">周三</option>
-				<option value="4">周四</option>
-				<option value="5">周五</option>
-				<option value="6">周六</option>
-				<option value="7">周日</option>
-			</select><br /> 节数：
-			<select id="ClassLine">
-				<option value="1">第一节</option>
-				<option value="2">第二节</option>
-				<option value="3">第三节</option>
-				<option value="4">第四节</option>
-				<option value="5">第五节</option>
-				<option value="6">第六节</option>
-			</select><br />
-			<input type="button" onclick="ChangeClass();" value="click" />
-		</form>
 		<!-- 包括所有已编译的插件 -->
 		<script src="js/tableAjax.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bootstrap.min.js"></script>

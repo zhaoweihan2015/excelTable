@@ -69,6 +69,8 @@ function PostCheck(checkName1, textName1, checkName2, textName2) {
 			AjaxSuccess(data, $num)
 				//weekselect事件
 			$("#weekselect").on("click", function() {
+				$("#newWeek").val($num);
+				//进行请求
 				$num = $("#weekselect").val() + '';
 				AjaxSuccess(data, $num)
 			})
@@ -89,7 +91,7 @@ function ChangeClass() {
 	$newDate = $("#ClassDate").val();
 	$newLine = $("#ClassLine").val();
 	$oldWeek = $("#weekselect").val();
-	$mid = $("#changebox").find("a").eq(0).attr("id");
+	$mid = $(".changebox").eq(1).find("a").eq(0).attr("id");
 	//AJAX异步请求
 	$.ajax({
 		type: "post",
@@ -111,6 +113,8 @@ function ChangeClass() {
 			}
 		}
 	});
+	//chbox消失
+	showhideDiv('#chBox','hide');
 }
 //表格清空事件
 function CleanTable() {
@@ -138,12 +142,13 @@ function PrintTable(data, num) {
 				ClassLineTr = oTable.getElementsByTagName('tr')[data[$i]['ClassLine']]
 				ClassDateTd = ClassLineTr.getElementsByTagName('td')[data[$i]['ClassDate']];
 				ClassDateTd.innerHTML += "<a class='scheduleA' id='" + data[$i]['mid'] + "'>" + data[$i]['ClassName'] + "</a>";
-				$oldMid = data[$i]['mid'];
 				//删除操作表格填充
-				if(data[$i]['Delet'] == '1') {
-					$dataChange += '<li>' + data[$i]['ClassName'] + '  第' + num + '周 星期' + data[$i]['ClassDate'] + ' 第' + data[$i]['ClassLine'] + '节课  (曾在第'+data[$i]['oldWeek']+'周)<a onclick = "DeletClass(' +data[$i]['mid']+ ','+data[$i]['oldWeek'] +');">删除</a></li>';
-				}
 			}
+				if(data[$i]['Delet'] == '1') {
+					$dataChange += '<li>' + data[$i]['ClassName'] + '  第' + data[$i]['newWeek'] + '周 星期' + data[$i]['ClassDate'] + ' 第' + data[$i]['ClassLine'] + '节课  (曾在第'+data[$i]['oldWeek']+'周)<a onclick = "DeletClass(' +data[$i]['mid']+ ','+data[$i]['oldWeek'] +');">删除</a></li>';
+				}
+				//old mid record
+				$oldMid = data[$i]['mid'];
 		}
 		oBox.html($dataChange);
 		//数组循环
@@ -157,8 +162,8 @@ function DeletClass(mid,oldWeek) {
 		url: "./libs/Controller/tableControllerl.class.php",
 		dataType: "json",
 		data: {
-			'mid': mid,
-			'oldWeek':oldWeek,
+			'mid': mid,//mid
+			'oldWeek':oldWeek,//旧周数
 			'mode': 'Delet'
 		},
 		success: function(data) {
@@ -178,7 +183,7 @@ function show2Box() {
 		$oldLine = $mid[12];
 		$cid = $mid.substr(0, 11);
 		$classname = this.innerHTML;
-		$("#changebox").html('<a id="' + $mid + '" >' + $classname + ' 周' + $oldLine + ' 第' + $oldDate + '节课</a>');
+		$(".changebox").html('<a id="' + $mid + '" >' + $classname + ' 周' + $oldLine + ' 第' + $oldDate + '节课</a>');
 	})
 }
 //查询页动态
